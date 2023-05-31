@@ -1,0 +1,82 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jump2Daegu</title>
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'bootstrap.min.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-3 top">
+                <a href="#">Sign in</a>
+                <a href="#">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-6 title text-align-center">
+                JumpToDaegu
+            </div>
+        </div>
+        <nav>
+            <div class="row justify-content-md-center">
+                <div class="col-6 menu justify-content-around">
+                    <a href="#"><div class="nav-item">중구</div></a>
+                    <a href="#"><div class="nav-item">북구</div></a>
+                    <a href="#"><div class="nav-item">서구</div></a>
+                    <a href="#"><div class="nav-item">동구</div></a>
+                    <a href="#"><div class="nav-item">남구</div></a>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-6 menu justify-content-around">
+                    <a href="#"><div class="nav-item">수성구</div></a>
+                    <a href="#"><div class="nav-item">달성구</div></a>
+                    <a href="#"><div class="nav-item">달성군</div></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+<nav class = "navbar navbar-expanding-lg navbar-light bg-light border-bottom">
+    <div class = "container-fluid">
+        <a class = "navbar-brand" href = "{{url_for('main.index') }}"></a>
+        <button class = "navbar-toggler" type = "button" 
+                data-bs-toggle = "collapse" 
+                data-bs-target = "#navbarSupprtedContent"
+                aria-controls = "navbarSupprtedContent"
+                aria-expanded = "false"
+                aria-label = "Toggle navigation">
+            <span class = "navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse", id = "navbarSupprtedContent">
+            {%if g.user%}
+            <ul class = "navbar-nav">
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "{{url_for('auth.logout')}}">{{g.user.username}}(로그아웃)</a>
+                </li>
+            </ul>
+            {%else%}
+            <ul class = "navbar-nav me-auto mb-2 mb-lg-0">
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "{{url_for('auth.signup')}}">계정생성</a>
+                </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "{{url_for('auth.login')}}">로그인</a>
+                </li>
+            </ul>
+            {%endif%}
+        </div>
+    </div>
+</nav>
+{% block content %}
+{% endblock %}
+<script src = "{{ url_for('static', filename = 'bootstrap.min.js') }}"></script>
+{%block script%}
+{%endblock%}
+</body>
+</html>

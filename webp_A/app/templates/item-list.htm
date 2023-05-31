@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% include "head.htm" %}
+{% include "header.htm" %}
+<html lang="en">
+<head>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    {% endblock %}
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-3">
+                <a href="{{ url_for('question.create_item') }}"><button class="write">Write</button></a>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            {%if item_list%}
+            {%for item in item_list.items%}
+            
+                <div class="col-3" >
+                    <a href="{{url_for('question.detail_item', item_id = item.id) }}">
+                    <div class="item-container">
+                        <div class="img-container">
+                            <img src="data:image/jpeg;base64,{{ item.img }}" class="img-fluid">
+                        </div>
+                        <div class="metadata">
+                            <div class="title">
+                                {{ item.store_name }}
+                            </div>
+                            <div class="rate">
+                                {% for i in range(item.rate) %}
+                                    <i class="fa-solid fa-star"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            
+            {%endfor%}
+            {%else%}
+                등록된 게시물이 없습니다.
+            {%endif%}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% block header %}
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <div class="col-3 top">
+            {% if g.user %}
+                <a class = "nav-link" href = "{{url_for('auth.logout')}}">{{g.user.username}}(Logout)</a>
+            {% else %}
+                <a href="{{url_for('auth.login')}}">Sign in</a>
+                <a href="{{url_for('auth.signup')}}">Sign up</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-6 title text-align-center">
+            <a href="{{ url_for('question._list_item') }}">JumpToDaegu</a>
+        </div>
+    </div>
+    <nav>
+        <div class="row justify-content-md-center">
+            <div class="col-6 menu justify-content-around">
+                <a href="{{url_for('question._list_item', loc = '중구') }}"><div class="nav-item">중구</div></a>
+                <a href="{{url_for('question._list_item', loc = '북구') }}"><div class="nav-item">북구</div></a>
+                <a href="{{url_for('question._list_item', loc = '서구') }}"><div class="nav-item">서구</div></a>
+                <a href="{{url_for('question._list_item', loc = '동구') }}"><div class="nav-item">동구</div></a>
+                <a href="{{url_for('question._list_item', loc = '남구') }}"><div class="nav-item">남구</div></a>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-6 menu justify-content-around">
+                <a href="{{url_for('question._list_item', loc = '수성구') }}"><div class="nav-item">수성구</div></a>
+                <a href="{{url_for('question._list_item', loc = '달성구') }}"><div class="nav-item">달성구</div></a>
+                <a href="{{url_for('question._list_item', loc = '달성군') }}"><div class="nav-item">달성군</div></a>
+            </div>
+        </div>
+    </nav>
+</div>
+{% endblock %}

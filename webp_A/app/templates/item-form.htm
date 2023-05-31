@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% include "head.htm" %}
+{% include "header.htm" %}
+<html lang="en">
+<head>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    {% endblock %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-5">
+                <form method="POST" enctype=multipart/form-data>
+                    {{form.csrf_token}}
+                    {%if form.errors%}
+                        <div class = "alert alert-danger" role = "alert">
+                            {%for field, errors in form.errors.items()%}
+                            <strong>{{form[field].label}}</strong>
+                            <ul>
+                                {%for error in errors %}
+                                <li>{{error}}</li>
+                                {%endfor%}
+                            </ul>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+
+                    <div class = "mb-3">
+                        <label for = "store_name">제목</label>
+                        <input type = "text" class = "form-control" name = "store_name" id = "store_name" value = "{{form.store_name.data or ''}}">
+                    </div>
+                    
+                    <div class = "mb-3">
+                        <label for = "desc">내용</label>
+                        <textarea class = "form-control" name = "desc" id = "desc" rows = "10">{{form.desc.data or ''}}</textarea>
+                    </div>
+                    <div class = "mb-3">
+                        <label for = "rate">별점</label>
+                        <input type="number" class="form-control" name="rate" id="rate" max="5" min="1">
+                    </div>
+                    <div class = "mb-3">
+                        <label for = "img">이미지</label>
+                        <input type="file" class="form-control" name="img" id="img">
+                    </div>
+                    <div class = "mb-3">
+                        {% for subfield in form.location %}
+                            <tr>
+                                <td>{{ subfield }}</td>
+                                <td>{{ subfield.label }}</td>
+                            </tr>
+                        {% endfor %}
+                    </div>
+                    
+                    <button type = "submit" class = "write"> 저장하기 </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

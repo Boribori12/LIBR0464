@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% include "head.htm" %}
+{% include "header.htm" %}
+<html lang="en">
+<head>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    {% endblock %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-5">
+                {%if session['user_id'] == item.user_id%}
+                 <a href = "{{url_for('question.delete_item', item_id = item.id)}}">
+                    <button class = "write">삭제</button></a>
+                {%endif%}
+                <div class="item-container">
+                    <div class="img-container">
+                        <img src="data:image/jpeg;base64,{{ item.img }}" class="img-fluid">
+                    </div>
+                    <div class="metadata">
+                        <div class="title">
+                            {{ item.store_name }}
+                        </div>
+                        <div class="rate">
+                            {% for i in range(item.rate) %}
+                                <i class="fa-solid fa-star"></i>
+                            {% endfor %}
+                        </div>         
+                        </div>
+                    <div class="desc">
+                            {{ item.desc }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
